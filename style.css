@@ -493,3 +493,32 @@ footer {
         font-size: 0.9rem;
     }
 }
+
+/* Enhancements for start-btn */
+.start-btn {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px 40px;
+    font-size: 2rem;
+    box-shadow: 6px 6px 0px var(--text-color);
+}
+
+.start-btn.pulse {
+    animation: pulse-btn 2s infinite;
+}
+
+@keyframes pulse-btn {
+    0% {
+        transform: scale(1);
+        box-shadow: 6px 6px 0px var(--text-color);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 10px 10px 0px var(--secondary-color);
+        background-color: #ff2a6d;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 6px 6px 0px var(--text-color);
+    }
+}

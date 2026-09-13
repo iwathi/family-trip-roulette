@@ -173,6 +173,7 @@ function startRoulette() {
     isSpinning = true;
     startBtn.disabled = true;
     startBtn.textContent = "ルーレット中...";
+    startBtn.classList.remove('pulse');
     destinationCost.innerHTML = "";
     resultDetails.style.display = 'none'; // 追加情報を隠す
     rouletteDisplay.classList.add('spinning');
@@ -197,6 +198,7 @@ function stopRoulette(candidates) {
     isSpinning = false;
     startBtn.disabled = false;
     startBtn.textContent = "もう一度決める！";
+    startBtn.classList.add('pulse');
     rouletteDisplay.classList.remove('spinning');
 
     const finalIndex = Math.floor(Math.random() * candidates.length);
