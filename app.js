@@ -127,9 +127,26 @@ function stopRoulette(candidates) {
         spotsList.appendChild(li);
     });
     
-    // 楽天トラベルのリンクを設定（直接リンクだとエラーになるためGoogle検索経由）
-    const rakutenUrl = `https://www.google.com/search?q=${encodeURIComponent('楽天トラベル ' + selected.name + ' 宿')}`;
-    rakutenLink.href = rakutenUrl;
+    // 地図を表示（Google Mapsの埋め込みで、県にピンが刺さるようにする）
+    const mapContainer = document.getElementById('mapContainer');
+    mapContainer.innerHTML = `
+        <div class="map-wrapper">
+            <div class="dart-icon">🎯</div>
+            <iframe 
+                width="100%" 
+                height="300" 
+                frameborder="0" 
+                style="border:0; border-radius: 10px;" 
+                referrerpolicy="no-referrer-when-downgrade" 
+                src="https://maps.google.com/maps?q=${encodeURIComponent(selected.name)}&t=&z=6&ie=UTF8&iwloc=&output=embed">
+            </iframe>
+        </div>
+    `;
+
+    // 観光プラン検索リンクを設定
+    const planLink = document.getElementById('planLink');
+    const planUrl = `https://www.google.com/search?q=${encodeURIComponent(selected.name + ' 観光スポット モデルコース')}`;
+    planLink.href = planUrl;
     
     // 追加情報を表示
     resultDetails.style.display = 'block';

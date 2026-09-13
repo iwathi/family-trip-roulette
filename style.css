@@ -353,3 +353,41 @@ footer {
     transform: translate(-1px, -1px);
     box-shadow: 3px 3px 0px var(--text-color);
 }
+
+.map-container {
+    margin-bottom: 25px;
+    border: 3px solid var(--text-color);
+    border-radius: 12px;
+    box-shadow: 4px 4px 0px var(--secondary-color);
+    overflow: hidden;
+    position: relative;
+    background: #eef;
+}
+
+.map-wrapper {
+    position: relative;
+}
+
+.dart-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 4rem;
+    z-index: 10;
+    pointer-events: none;
+    animation: dartHit 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: 0.2s;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.4));
+}
+
+@keyframes dartHit {
+    0% {
+        transform: translate(-50%, -250%) scale(2) rotate(45deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
