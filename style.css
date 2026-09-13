@@ -1,0 +1,334 @@
+:root {
+    --primary-color: #ff477e; /* Bright pink */
+    --secondary-color: #00bbf9; /* Bright blue */
+    --accent-color: #fee440; /* Bright yellow */
+    --bg-color: #fcf6bd; /* Light yellow background */
+    --text-color: #3d348b; /* Dark purple for readable text */
+    --card-bg: #ffffff;
+    --border-radius: 20px; /* More rounded */
+    --thick-border: 4px solid var(--text-color);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-color);
+    background-image: radial-gradient(var(--accent-color) 20%, transparent 20%),
+                      radial-gradient(var(--accent-color) 20%, transparent 20%);
+    background-position: 0 0, 50px 50px;
+    background-size: 100px 100px;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: var(--thick-border);
+    box-shadow: 6px 6px 0px var(--secondary-color);
+    transform: rotate(-1deg);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0px var(--accent-color);
+    letter-spacing: 2px;
+}
+
+header p {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.roulette-section {
+    background: var(--card-bg);
+    padding: 40px 20px;
+    border-radius: var(--border-radius);
+    border: var(--thick-border);
+    box-shadow: 8px 8px 0px var(--primary-color);
+    text-align: center;
+    margin-bottom: 40px;
+    transform: rotate(1deg);
+}
+
+.roulette-display {
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    border: 6px dashed var(--secondary-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.destination-name {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px var(--accent-color);
+}
+
+.destination-cost {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #ff0054;
+    background: var(--accent-color);
+    padding: 5px 15px;
+    border-radius: 10px;
+    border: 2px solid var(--text-color);
+    min-height: 2.2rem;
+    display: inline-block;
+}
+
+.start-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: var(--thick-border);
+    padding: 15px 40px;
+    font-size: 1.8rem;
+    font-weight: 900;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    box-shadow: 4px 4px 0px var(--text-color);
+    letter-spacing: 1px;
+}
+
+.start-btn:hover {
+    background-color: #ff2a6d;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--text-color);
+}
+
+.start-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--text-color);
+}
+
+.start-btn:disabled {
+    background-color: #ccc;
+    color: #888;
+    cursor: not-allowed;
+    box-shadow: 4px 4px 0px #888;
+    transform: none;
+}
+
+.filters-section {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    border: var(--thick-border);
+    box-shadow: 6px 6px 0px #00f5d4; /* Bright mint shadow */
+}
+
+.filters-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: var(--secondary-color);
+    text-shadow: 1px 1px 0px var(--text-color);
+    text-align: center;
+}
+
+.filter-group {
+    margin-bottom: 30px;
+}
+
+.filter-group label {
+    display: block;
+    font-weight: 900;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+select {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 3px solid var(--text-color);
+    border-radius: 10px;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 2px 2px 0px var(--text-color);
+}
+
+select:focus {
+    border-color: var(--secondary-color);
+}
+
+.visited-prefectures-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 12px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding: 20px;
+    border: 3px solid var(--text-color);
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: inset 0px 4px 8px rgba(0,0,0,0.05);
+}
+
+.pref-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 2px solid var(--text-color);
+    transition: transform 0.1s;
+}
+
+.pref-checkbox-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.pref-checkbox-wrapper input[type="checkbox"] {
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.pref-checkbox-wrapper label {
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.region-header {
+    grid-column: 1 / -1;
+    font-weight: 900;
+    color: #fff;
+    background-color: var(--secondary-color);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 2px solid var(--text-color);
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: fit-content;
+}
+
+.region-header:first-child {
+    margin-top: 0;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-color);
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border: var(--thick-border);
+}
+
+/* Animation */
+@keyframes shake {
+    0% { transform: translate(2px, 2px) rotate(0deg); }
+    10% { transform: translate(-2px, -4px) rotate(-2deg); }
+    20% { transform: translate(-6px, 0px) rotate(2deg); }
+    30% { transform: translate(6px, 4px) rotate(0deg); }
+    40% { transform: translate(2px, -2px) rotate(2deg); }
+    50% { transform: translate(-2px, 4px) rotate(-2deg); }
+    60% { transform: translate(-6px, 2px) rotate(0deg); }
+    70% { transform: translate(6px, 2px) rotate(-2deg); }
+    80% { transform: translate(-2px, -2px) rotate(2deg); }
+    90% { transform: translate(2px, 4px) rotate(0deg); }
+    100% { transform: translate(2px, -4px) rotate(-2deg); }
+}
+
+.spinning .destination-name {
+    animation: shake 0.15s infinite;
+    color: var(--secondary-color);
+    text-shadow: none;
+}
+
+.result-details {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--bg-color);
+    border: 3px dashed var(--secondary-color);
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.result-details h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.spots-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-align: left;
+}
+
+.spots-list li {
+    background: var(--card-bg);
+    margin-bottom: 8px;
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: 2px solid var(--text-color);
+    font-weight: 700;
+    box-shadow: 2px 2px 0px var(--text-color);
+}
+
+.rakuten-btn {
+    display: inline-block;
+    background-color: #bf0000; /* Rakuten Redish */
+    color: white;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 1.2rem;
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: 3px solid var(--text-color);
+    box-shadow: 4px 4px 0px var(--text-color);
+    transition: all 0.1s ease-in-out;
+}
+
+.rakuten-btn:hover {
+    background-color: #e60000;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--text-color);
+    color: white;
+}
+
+.rakuten-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--text-color);
+}
