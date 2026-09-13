@@ -1,6 +1,6 @@
-
 // DOM Elements
 const visitedPrefecturesList = document.getElementById('visitedPrefecturesList');
+const genreFiltersList = document.getElementById('genreFiltersList');
 const budgetFilter = document.getElementById('budgetFilter');
 const startBtn = document.getElementById('startBtn');
 const destinationName = document.getElementById('destinationName');
@@ -8,7 +8,6 @@ const destinationCost = document.getElementById('destinationCost');
 const rouletteDisplay = document.getElementById('rouletteDisplay');
 const resultDetails = document.getElementById('resultDetails');
 const spotsList = document.getElementById('spotsList');
-const rakutenLink = document.getElementById('rakutenLink');
 
 let isSpinning = false;
 let spinInterval;
@@ -16,11 +15,36 @@ let spinInterval;
 // 初期化処理
 function init() {
     renderPrefectureCheckboxes();
+    renderGenreCheckboxes();
     startBtn.addEventListener('click', startRoulette);
+}
+
+// ジャンルチェックボックスを描画
+function renderGenreCheckboxes() {
+    const genres = [...new Set(prefectureData.map(p => p.genre))];
+    genres.forEach(genre => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'pref-checkbox-wrapper';
+        
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `genre-${genre}`;
+        checkbox.value = genre;
+        
+        const label = document.createElement('label');
+        label.htmlFor = `genre-${genre}`;
+        label.textContent = genre;
+        
+        wrapper.appendChild(checkbox);
+        wrapper.appendChild(label);
+        genreFiltersList.appendChild(wrapper);
+    });
 }
 
 // 地方ごとにグループ化してチェックボックスを描画
 function renderPrefectureCheckboxes() {
+    const savedVisited = JSON.parse(localStorage.getItem('visitedPrefectures') || '[]');
+    
     const regions = {};
     prefectureData.forEach(pref => {
         if (!regions[pref.region]) {
@@ -43,6 +67,11 @@ function renderPrefectureCheckboxes() {
             checkbox.type = 'checkbox';
             checkbox.id = `pref-${pref.id}`;
             checkbox.value = pref.id;
+            if (savedVisited.includes(pref.id)) {
+                checkbox.checked = true;
+            }
+            
+            checkbox.addEventListener('change', saveVisitedToStorage);
 
             const label = document.createElement('label');
             label.htmlFor = `pref-${pref.id}`;
@@ -55,18 +84,28 @@ function renderPrefectureCheckboxes() {
     }
 }
 
+function saveVisitedToStorage() {
+    const visitedIds = Array.from(document.querySelectorAll('.visited-prefectures-container input[type="checkbox"][id^="pref-"]:checked'))
+                           .map(cb => parseInt(cb.value));
+    localStorage.setItem('visitedPrefectures', JSON.stringify(visitedIds));
+}
+
 // 候補となる都道府県をフィルター
 function getCandidates() {
-    const visitedIds = Array.from(document.querySelectorAll('.visited-prefectures-container input[type="checkbox"]:checked'))
+    const visitedIds = Array.from(document.querySelectorAll('.visited-prefectures-container input[type="checkbox"][id^="pref-"]:checked'))
                            .map(cb => parseInt(cb.value));
 
     const maxBudgetStr = budgetFilter.value;
     const maxBudget = maxBudgetStr === 'unlimited' ? Infinity : parseInt(maxBudgetStr);
+    
+    const checkedGenres = Array.from(document.querySelectorAll('#genreFiltersList input[type="checkbox"]:checked'))
+                               .map(cb => cb.value);
 
     return prefectureData.filter(pref => {
         const notVisited = !visitedIds.includes(pref.id);
         const withinBudget = pref.cost <= maxBudget;
-        return notVisited && withinBudget;
+        const matchesGenre = checkedGenres.length === 0 || checkedGenres.includes(pref.genre);
+        return notVisited && withinBudget && matchesGenre;
     });
 }
 
@@ -129,7 +168,7 @@ function stopRoulette(candidates) {
     
     // 地図を表示（Google Mapsの埋め込みで、県にピンが刺さるようにする）
     const mapContainer = document.getElementById('mapContainer');
-    mapContainer.innerHTML = `
+    mapContainer.innerHTML = \`
         <div class="map-wrapper">
             <div class="dart-icon">🎯</div>
             <iframe 
@@ -138,14 +177,14 @@ function stopRoulette(candidates) {
                 frameborder="0" 
                 style="border:0; border-radius: 10px;" 
                 referrerpolicy="no-referrer-when-downgrade" 
-                src="https://maps.google.com/maps?q=${encodeURIComponent(selected.name)}&t=&z=6&ie=UTF8&iwloc=&output=embed">
+                src="https://maps.google.com/maps?q=\${encodeURIComponent(selected.name)}&t=&z=6&ie=UTF8&iwloc=&output=embed">
             </iframe>
         </div>
-    `;
+    \`;
 
     // 観光プラン検索リンクを設定
     const planLink = document.getElementById('planLink');
-    const planUrl = `https://www.google.com/search?q=${encodeURIComponent(selected.name + ' 観光スポット モデルコース')}`;
+    const planUrl = \`https://www.google.com/search?q=\${encodeURIComponent(selected.name + ' 観光スポット モデルコース')}\`;
     planLink.href = planUrl;
     
     // 追加情報を表示
