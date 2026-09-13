@@ -457,3 +457,39 @@ footer {
         grid-template-columns: 1fr; /* スマホではカードを1列に */
     }
 }
+
+/* Global Navigation Menu */
+.global-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.nav-item {
+    background: #fff;
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 3px solid var(--text-color);
+    box-shadow: 3px 3px 0px var(--secondary-color);
+    transition: transform 0.1s;
+    font-size: 1rem;
+}
+.nav-item:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--secondary-color);
+}
+.nav-item.active {
+    background: var(--accent-color);
+    color: var(--text-color);
+}
+
+@media (max-width: 600px) {
+    .nav-item {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+}

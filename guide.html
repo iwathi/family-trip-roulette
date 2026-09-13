@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>費用計算と使い方ガイド - 家族旅行 行き先ルーレット</title>
+    <link rel="stylesheet" href="style.css?v=14">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .guide-section {
+            background: var(--card-bg);
+            border: 3px solid var(--text-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 4px 4px 0px var(--secondary-color);
+        }
+        .guide-section h2 {
+            color: var(--primary-color);
+            border-bottom: 3px dashed var(--text-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .guide-section h3 {
+            color: var(--secondary-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .guide-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .guide-section ul li {
+            margin-bottom: 10px;
+            padding-left: 1.5em;
+            text-indent: -1.5em;
+        }
+        .guide-section ul li::before {
+            content: "💡";
+            margin-right: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 費用概算とガイド</h1>
+            <nav class="global-nav">
+                <a href="index.html" class="nav-item">🎰 ルーレット</a>
+                <a href="list.html" class="nav-item">📋 データ一覧</a>
+                <a href="guide.html" class="nav-item active">📖 費用ガイド</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="guide-section">
+                <h2>前提となる旅行条件</h2>
+                <p>当アプリで算出している費用や時間は、以下の条件を基準としています。</p>
+                <ul>
+                    <li><strong>出発地：</strong> 仙台（宮城県）</li>
+                    <li><strong>人数：</strong> 家族5人（大人2名、子供3名）</li>
+                    <li><strong>日数：</strong> 2泊3日</li>
+                </ul>
+            </div>
+
+            <div class="guide-section">
+                <h2>🏨 宿泊費の計算方法</h2>
+                <p>宿泊費は、家族5人が2泊するための概算費用として設定しています。</p>
+                <ul>
+                    <li><strong>目安金額：</strong> 全国一律で概ね「10万円〜12万円程度」として計算しています（1人あたり1泊1万円前後の計算）。</li>
+                    <li><strong>変動要因：</strong> 観光地として人気が高いエリア（都市部や有名リゾート地など）は若干高めに設定しています。</li>
+                    <li>※食事付き・素泊まり、ホテルのランクによって実際の費用は大きく変わるため、あくまで平均的なファミリー向け宿の目安です。</li>
+                </ul>
+            </div>
+
+            <div class="guide-section">
+                <h2>🚆 移動手段ごとの概算費用・時間</h2>
+                <p>移動費用は往復料金、時間は片道の目安時間を算出しています。</p>
+                
+                <h3>🚗 車の場合</h3>
+                <ul>
+                    <li><strong>費用の考え方：</strong> 自家用車（ミニバン等）1台で移動した場合の「高速道路の往復ETC料金」＋「往復のガソリン代」を合算しています。</li>
+                    <li><strong>時間の考え方：</strong> 仙台からの高速道路を利用した標準的な所要時間です。（渋滞や休憩時間は含みません）</li>
+                    <li><strong>特記事項：</strong> 北海道はフェリー（仙台港・八戸港等から）の利用料金と乗船時間を加味しています。沖縄など物理的に困難な地域は対象外としています。</li>
+                </ul>
+
+                <h3>🚄 新幹線・鉄道の場合</h3>
+                <ul>
+                    <li><strong>費用の考え方：</strong> 「大人2名＋小学生3名（大人の半額）」を想定した往復の乗車券＋特急券の合計です。</li>
+                    <li><strong>時間の考え方：</strong> 仙台駅を出発し、目的地の主要駅（東京、新大阪、博多など）までの最速ルート（乗り継ぎ含む）の時間です。</li>
+                    <li><strong>特記事項：</strong> 子供が未就学児（無料）の場合は、表示されている金額よりも大幅に安くなります。</li>
+                </ul>
+
+                <h3>✈️ 飛行機の場合</h3>
+                <ul>
+                    <li><strong>費用の考え方：</strong> 仙台空港などからの往復航空券（早期割引やLCC、通常期を想定）× 5人分です。</li>
+                    <li><strong>時間の考え方：</strong> 飛行時間＋空港での搭乗手続き・待ち時間（約1時間）を含めた目安です。</li>
+                    <li><strong>特記事項：</strong> 直行便がない県は、新幹線＋飛行機などの乗り継ぎルートを想定しています。航空券はシーズンによって価格が2〜3倍に跳ね上がることにご注意ください。</li>
+                </ul>
+            </div>
+
+            <div class="guide-section">
+                <h2>⚠️ その他の留意事項（お小遣い・シーズン）</h2>
+                <p>実際に旅行を計画される際は、アプリの概算費用に加えて以下の費用にご注意ください。</p>
+                <ul>
+                    <li><strong>飲食代・レジャー費：</strong> 現地での昼食・夕食代、お土産代、テーマパークの入場料（数万円〜）などは費用に含まれていません。</li>
+                    <li><strong>ハイシーズン割増：</strong> ゴールデンウィーク、お盆、年末年始などの繁忙期は、宿泊費と航空券が大幅に高騰します。表示額の1.5〜2倍になる場合もあります。</li>
+                    <li><strong>レンタカー代：</strong> 飛行機や新幹線で到着した後、現地でレンタカーを借りる場合は、別途2泊3日で1.5万円〜3万円程度必要になります。</li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>
+            <p>※費用は仙台発・家族5人（大人2名、子供3名）の交通費と宿泊費の目安です。実際の価格とは異なる場合があります。</p>
+        </footer>
+    </div>
+</body>
+</html>
