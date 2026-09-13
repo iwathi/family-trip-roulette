@@ -64,37 +64,112 @@
         </header>
 
         <main>
+            <div class="filters-section" style="margin-top: 20px; box-shadow: none;">
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div class="filter-group" style="flex: 1; min-width: 200px;">
+                        <label for="listBudgetFilter">💰 予算上限</label>
+                        <select id="listBudgetFilter">
+                            <option value="unlimited">制限なし</option>
+                            <option value="100000">10万円以内</option>
+                            <option value="150000">15万円以内</option>
+                            <option value="200000">20万円以内</option>
+                            <option value="300000">30万円以内</option>
+                            <option value="400000">40万円以内</option>
+                        </select>
+                    </div>
+                    <div class="filter-group" style="flex: 2; min-width: 300px;">
+                        <label>🎯 ジャンル</label>
+                        <div id="genreFilters" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <!-- Checkboxes will be injected here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="dataGrid" class="data-grid">
                 <!-- Data cards will be rendered here -->
             </div>
         </main>
     </div>
     
-    <script src="data.js"></script>
+    <script src="data.js?v=3"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const dataGrid = document.getElementById('dataGrid');
+            const listBudgetFilter = document.getElementById('listBudgetFilter');
+            const genreFiltersContainer = document.getElementById('genreFilters');
             
+            // Extract unique genres
+            const genres = [...new Set(prefectureData.map(p => p.genre))];
+            
+            // Render genre checkboxes
+            genres.forEach(genre => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'pref-checkbox-wrapper';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `genre-${genre}`;
+                checkbox.value = genre;
+                checkbox.checked = false; // By default all or none? Let's say none means "all". Or better, all checked by default.
+                
+                const label = document.createElement('label');
+                label.htmlFor = `genre-${genre}`;
+                label.textContent = genre;
+                
+                wrapper.appendChild(checkbox);
+                wrapper.appendChild(label);
+                genreFiltersContainer.appendChild(wrapper);
+                
+                checkbox.addEventListener('change', renderCards);
+            });
+            
+            listBudgetFilter.addEventListener('change', renderCards);
+
             function formatCurrency(number) {
                 return new Intl.NumberFormat('ja-JP').format(number) + '円';
             }
+            
+            function renderCards() {
+                dataGrid.innerHTML = '';
+                
+                const maxBudgetStr = listBudgetFilter.value;
+                const maxBudget = maxBudgetStr === 'unlimited' ? Infinity : parseInt(maxBudgetStr);
+                
+                const checkedGenres = Array.from(genreFiltersContainer.querySelectorAll('input:checked')).map(cb => cb.value);
+                
+                const filteredData = prefectureData.filter(pref => {
+                    const withinBudget = pref.cost <= maxBudget;
+                    const matchesGenre = checkedGenres.length === 0 || checkedGenres.includes(pref.genre);
+                    return withinBudget && matchesGenre;
+                });
+                
+                if (filteredData.length === 0) {
+                    dataGrid.innerHTML = '<p>条件に一致する都道府県がありません。</p>';
+                    return;
+                }
 
-            prefectureData.forEach(pref => {
-                const card = document.createElement('div');
-                card.className = 'data-card';
-                
-                const spotsHtml = pref.spots.map(spot => `<li>${spot}</li>`).join('');
-                
-                card.innerHTML = `
-                    <h3>${pref.name}</h3>
-                    <div class="region-badge">${pref.region}</div>
-                    <div class="cost">概算費用: 約 ${formatCurrency(pref.cost)}</div>
-                    <div><strong>おすすめスポット:</strong></div>
-                    <ul>${spotsHtml}</ul>
-                `;
-                
-                dataGrid.appendChild(card);
-            });
+                filteredData.forEach(pref => {
+                    const card = document.createElement('div');
+                    card.className = 'data-card';
+                    
+                    const spotsHtml = pref.spots.map(spot => `<li>${spot}</li>`).join('');
+                    
+                    card.innerHTML = `
+                        <h3>${pref.name}</h3>
+                        <div class="region-badge">${pref.region}</div>
+                        <div class="region-badge" style="background: var(--secondary-color); color: white;">${pref.genre}</div>
+                        <div class="cost">概算費用: 約 ${formatCurrency(pref.cost)}</div>
+                        <div><strong>おすすめスポット:</strong></div>
+                        <ul>${spotsHtml}</ul>
+                    `;
+                    
+                    dataGrid.appendChild(card);
+                });
+            }
+            
+            // Initial render
+            renderCards();
         });
     </script>
 </body>
