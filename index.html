@@ -44,14 +44,34 @@
                 <h2>絞り込み設定</h2>
                 
                 <div class="filter-group">
-                    <label for="budgetFilter">💰 予算上限（交通費＋宿泊費概算）</label>
+                    <label for="budgetFilter">💰 予算上限（宿泊費＋最安交通費）</label>
                     <select id="budgetFilter">
                         <option value="unlimited">制限なし</option>
-                        <option value="100000">10万円以内</option>
+                        <option value="150000">15万円以内</option>
                         <option value="200000">20万円以内</option>
                         <option value="300000">30万円以内</option>
                         <option value="400000">40万円以内</option>
                         <option value="500000">50万円以内</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>🚆 希望する移動手段（複数選択可）</label>
+                    <div style="display: flex; gap: 15px; margin-top: 5px;">
+                        <label><input type="checkbox" id="modeCar" value="car" checked style="width:18px;height:18px;margin-right:5px;"> 車</label>
+                        <label><input type="checkbox" id="modeShinkansen" value="shinkansen" checked style="width:18px;height:18px;margin-right:5px;"> 新幹線</label>
+                        <label><input type="checkbox" id="modeFlight" value="flight" checked style="width:18px;height:18px;margin-right:5px;"> 飛行機</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="timeFilter">⏳ 片道の移動時間上限</label>
+                    <select id="timeFilter">
+                        <option value="unlimited">制限なし</option>
+                        <option value="120">2時間以内</option>
+                        <option value="180">3時間以内</option>
+                        <option value="300">5時間以内</option>
+                        <option value="420">7時間以内</option>
                     </select>
                 </div>
                 

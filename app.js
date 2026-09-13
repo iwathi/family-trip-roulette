@@ -2,6 +2,10 @@
 const visitedPrefecturesList = document.getElementById('visitedPrefecturesList');
 const genreFiltersList = document.getElementById('genreFiltersList');
 const budgetFilter = document.getElementById('budgetFilter');
+const modeCar = document.getElementById('modeCar');
+const modeShinkansen = document.getElementById('modeShinkansen');
+const modeFlight = document.getElementById('modeFlight');
+const timeFilter = document.getElementById('timeFilter');
 const startBtn = document.getElementById('startBtn');
 const destinationName = document.getElementById('destinationName');
 const destinationCost = document.getElementById('destinationCost');
@@ -98,19 +102,62 @@ function getCandidates() {
     const maxBudgetStr = budgetFilter.value;
     const maxBudget = maxBudgetStr === 'unlimited' ? Infinity : parseInt(maxBudgetStr);
     
+    const maxTimeStr = timeFilter.value;
+    const maxTime = maxTimeStr === 'unlimited' ? Infinity : parseInt(maxTimeStr);
+
     const checkedGenres = Array.from(document.querySelectorAll('#genreFiltersList input[type="checkbox"]:checked'))
                                .map(cb => cb.value);
+                               
+    const allowedModes = {
+        car: modeCar.checked,
+        shinkansen: modeShinkansen.checked,
+        flight: modeFlight.checked
+    };
 
     return prefectureData.filter(pref => {
-        const notVisited = !visitedIds.includes(pref.id);
-        const withinBudget = pref.cost <= maxBudget;
+        // 除外県チェック
+        if (visitedIds.includes(pref.id)) return false;
+        
+        // ジャンルチェック
         const matchesGenre = checkedGenres.length === 0 || checkedGenres.some(g => pref.genre.includes(g));
-        return notVisited && withinBudget && matchesGenre;
+        if (!matchesGenre) return false;
+        
+        // 交通手段・時間・予算のチェック
+        let hasValidTransport = false;
+        let lowestTotalCost = Infinity;
+
+        // 指定された各移動手段について、条件に合うかチェック
+        for (const mode of ['car', 'shinkansen', 'flight']) {
+            if (!allowedModes[mode]) continue; // チェックされていない手段はスキップ
+            const tInfo = pref.transport[mode];
+            if (!tInfo) continue; // その手段が存在しない場合はスキップ
+            
+            if (tInfo.time <= maxTime) {
+                hasValidTransport = true;
+                const totalCost = pref.accommodationCost + tInfo.cost;
+                if (totalCost < lowestTotalCost) {
+                    lowestTotalCost = totalCost;
+                }
+            }
+        }
+
+        if (!hasValidTransport) return false; // 条件を満たす移動手段がない
+        if (lowestTotalCost > maxBudget) return false; // 最安で行っても予算オーバー
+
+        return true;
     });
 }
 
 function formatCurrency(number) {
     return new Intl.NumberFormat('ja-JP').format(number) + '円';
+}
+
+function formatTime(minutes) {
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    if (h > 0 && m > 0) return `${h}時間${m}分`;
+    if (h > 0) return `${h}時間`;
+    return `${m}分`;
 }
 
 function startRoulette() {
@@ -119,14 +166,14 @@ function startRoulette() {
     const candidates = getCandidates();
 
     if (candidates.length === 0) {
-        alert("条件に合う行き先がありません。フィルター条件を緩めてください。");
+        alert("条件に合う行き先がありません。予算や移動時間、手段などの条件を緩めてください。");
         return;
     }
 
     isSpinning = true;
     startBtn.disabled = true;
     startBtn.textContent = "ルーレット中...";
-    destinationCost.textContent = "";
+    destinationCost.innerHTML = "";
     resultDetails.style.display = 'none'; // 追加情報を隠す
     rouletteDisplay.classList.add('spinning');
 
@@ -156,7 +203,24 @@ function stopRoulette(candidates) {
     const selected = candidates[finalIndex];
 
     destinationName.textContent = `🎊 ${selected.name} 🎊`;
-    destinationCost.textContent = `概算費用: 約 ${formatCurrency(selected.cost)}`;
+    
+    // 詳細な費用の内訳を作成
+    let breakdownHtml = `<div class="cost-breakdown" style="font-size: 1rem; text-align: left; background: #fff; padding: 15px; border-radius: 10px; border: 2px solid var(--text-color); margin-top: 15px;">`;
+    breakdownHtml += `<div style="font-weight:bold; color:var(--primary-color); margin-bottom: 5px;">🏨 宿泊費（2泊概算）: 約 ${formatCurrency(selected.accommodationCost)}</div>`;
+    breakdownHtml += `<div style="font-weight:bold; margin-bottom: 5px;">移動手段（往復概算）:</div>`;
+    
+    if (selected.transport.car) {
+        breakdownHtml += `<div style="margin-left: 10px;">🚗 車: 約 ${formatTime(selected.transport.car.time)} / ${formatCurrency(selected.transport.car.cost)}</div>`;
+    }
+    if (selected.transport.shinkansen) {
+        breakdownHtml += `<div style="margin-left: 10px;">🚄 新幹線: 約 ${formatTime(selected.transport.shinkansen.time)} / ${formatCurrency(selected.transport.shinkansen.cost)}</div>`;
+    }
+    if (selected.transport.flight) {
+        breakdownHtml += `<div style="margin-left: 10px;">✈️ 飛行機: 約 ${formatTime(selected.transport.flight.time)} / ${formatCurrency(selected.transport.flight.cost)}</div>`;
+    }
+    breakdownHtml += `</div>`;
+    
+    destinationCost.innerHTML = breakdownHtml;
     
     // 観光スポットを表示
     spotsList.innerHTML = '';
@@ -166,7 +230,7 @@ function stopRoulette(candidates) {
         spotsList.appendChild(li);
     });
     
-    // 地図を表示（Google Mapsの埋め込みで、県にピンが刺さるようにする）
+    // 地図を表示
     const mapContainer = document.getElementById('mapContainer');
     mapContainer.innerHTML = `
         <div class="map-wrapper">

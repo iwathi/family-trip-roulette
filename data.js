@@ -20,7 +20,22 @@ const prefectureData = [
             "大自然・リゾート",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 105000,
+        "transport": {
+            "car": {
+                "time": 900,
+                "cost": 80000
+            },
+            "shinkansen": {
+                "time": 240,
+                "cost": 120000
+            },
+            "flight": {
+                "time": 72,
+                "cost": 100000
+            }
+        }
     },
     {
         "id": 2,
@@ -42,7 +57,19 @@ const prefectureData = [
             "歴史・文化",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 110000,
+        "transport": {
+            "car": {
+                "time": 240,
+                "cost": 30000
+            },
+            "shinkansen": {
+                "time": 144,
+                "cost": 80000
+            },
+            "flight": null
+        }
     },
     {
         "id": 3,
@@ -63,7 +90,19 @@ const prefectureData = [
             "歴史・文化",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 115000,
+        "transport": {
+            "car": {
+                "time": 120,
+                "cost": 15000
+            },
+            "shinkansen": {
+                "time": 72,
+                "cost": 40000
+            },
+            "flight": null
+        }
     },
     {
         "id": 4,
@@ -83,7 +122,16 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 120000,
+        "transport": {
+            "car": {
+                "time": 60,
+                "cost": 5000
+            },
+            "shinkansen": null,
+            "flight": null
+        }
     },
     {
         "id": 5,
@@ -103,7 +151,19 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 100000,
+        "transport": {
+            "car": {
+                "time": 240,
+                "cost": 30000
+            },
+            "shinkansen": {
+                "time": 144,
+                "cost": 80000
+            },
+            "flight": null
+        }
     },
     {
         "id": 6,
@@ -123,7 +183,19 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 105000,
+        "transport": {
+            "car": {
+                "time": 120,
+                "cost": 15000
+            },
+            "shinkansen": {
+                "time": 72,
+                "cost": 40000
+            },
+            "flight": null
+        }
     },
     {
         "id": 7,
@@ -143,7 +215,19 @@ const prefectureData = [
             "歴史・文化",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 110000,
+        "transport": {
+            "car": {
+                "time": 120,
+                "cost": 15000
+            },
+            "shinkansen": {
+                "time": 72,
+                "cost": 40000
+            },
+            "flight": null
+        }
     },
     {
         "id": 8,
@@ -163,7 +247,19 @@ const prefectureData = [
             "海・リゾート",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 115000,
+        "transport": {
+            "car": {
+                "time": 240,
+                "cost": 30000
+            },
+            "shinkansen": {
+                "time": 144,
+                "cost": 80000
+            },
+            "flight": null
+        }
     },
     {
         "id": 9,
@@ -183,7 +279,19 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 120000,
+        "transport": {
+            "car": {
+                "time": 240,
+                "cost": 30000
+            },
+            "shinkansen": {
+                "time": 144,
+                "cost": 80000
+            },
+            "flight": null
+        }
     },
     {
         "id": 10,
@@ -203,7 +311,19 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 100000,
+        "transport": {
+            "car": {
+                "time": 240,
+                "cost": 30000
+            },
+            "shinkansen": {
+                "time": 144,
+                "cost": 80000
+            },
+            "flight": null
+        }
     },
     {
         "id": 11,
@@ -223,7 +343,19 @@ const prefectureData = [
             "歴史・文化",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 105000,
+        "transport": {
+            "car": {
+                "time": 360,
+                "cost": 45000
+            },
+            "shinkansen": {
+                "time": 216,
+                "cost": 120000
+            },
+            "flight": null
+        }
     },
     {
         "id": 12,
@@ -243,7 +375,19 @@ const prefectureData = [
             "テーマパーク・遊び",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 110000,
+        "transport": {
+            "car": {
+                "time": 360,
+                "cost": 45000
+            },
+            "shinkansen": {
+                "time": 216,
+                "cost": 120000
+            },
+            "flight": null
+        }
     },
     {
         "id": 13,
@@ -263,7 +407,19 @@ const prefectureData = [
             "都市・グルメ",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 115000,
+        "transport": {
+            "car": {
+                "time": 360,
+                "cost": 45000
+            },
+            "shinkansen": {
+                "time": 216,
+                "cost": 120000
+            },
+            "flight": null
+        }
     },
     {
         "id": 14,
@@ -283,7 +439,19 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 120000,
+        "transport": {
+            "car": {
+                "time": 360,
+                "cost": 45000
+            },
+            "shinkansen": {
+                "time": 216,
+                "cost": 120000
+            },
+            "flight": null
+        }
     },
     {
         "id": 15,
@@ -303,7 +471,19 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 100000,
+        "transport": {
+            "car": {
+                "time": 240,
+                "cost": 30000
+            },
+            "shinkansen": {
+                "time": 144,
+                "cost": 80000
+            },
+            "flight": null
+        }
     },
     {
         "id": 16,
@@ -323,7 +503,19 @@ const prefectureData = [
             "自然",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 105000,
+        "transport": {
+            "car": {
+                "time": 360,
+                "cost": 45000
+            },
+            "shinkansen": {
+                "time": 216,
+                "cost": 120000
+            },
+            "flight": null
+        }
     },
     {
         "id": 17,
@@ -343,7 +535,22 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 110000,
+        "transport": {
+            "car": {
+                "time": 480,
+                "cost": 60000
+            },
+            "shinkansen": {
+                "time": 288,
+                "cost": 160000
+            },
+            "flight": {
+                "time": 90,
+                "cost": 120000
+            }
+        }
     },
     {
         "id": 18,
@@ -362,7 +569,22 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 115000,
+        "transport": {
+            "car": {
+                "time": 480,
+                "cost": 60000
+            },
+            "shinkansen": {
+                "time": 288,
+                "cost": 160000
+            },
+            "flight": {
+                "time": 90,
+                "cost": 120000
+            }
+        }
     },
     {
         "id": 19,
@@ -383,7 +605,19 @@ const prefectureData = [
             "テーマパーク・遊び",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 120000,
+        "transport": {
+            "car": {
+                "time": 360,
+                "cost": 45000
+            },
+            "shinkansen": {
+                "time": 216,
+                "cost": 120000
+            },
+            "flight": null
+        }
     },
     {
         "id": 20,
@@ -404,7 +638,19 @@ const prefectureData = [
             "歴史・文化",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 100000,
+        "transport": {
+            "car": {
+                "time": 360,
+                "cost": 45000
+            },
+            "shinkansen": {
+                "time": 216,
+                "cost": 120000
+            },
+            "flight": null
+        }
     },
     {
         "id": 21,
@@ -424,7 +670,22 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 105000,
+        "transport": {
+            "car": {
+                "time": 480,
+                "cost": 60000
+            },
+            "shinkansen": {
+                "time": 288,
+                "cost": 160000
+            },
+            "flight": {
+                "time": 90,
+                "cost": 120000
+            }
+        }
     },
     {
         "id": 22,
@@ -444,7 +705,22 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 110000,
+        "transport": {
+            "car": {
+                "time": 480,
+                "cost": 60000
+            },
+            "shinkansen": {
+                "time": 288,
+                "cost": 160000
+            },
+            "flight": {
+                "time": 90,
+                "cost": 120000
+            }
+        }
     },
     {
         "id": 23,
@@ -464,7 +740,22 @@ const prefectureData = [
             "都市・グルメ",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 115000,
+        "transport": {
+            "car": {
+                "time": 480,
+                "cost": 60000
+            },
+            "shinkansen": {
+                "time": 288,
+                "cost": 160000
+            },
+            "flight": {
+                "time": 90,
+                "cost": 120000
+            }
+        }
     },
     {
         "id": 24,
@@ -484,7 +775,22 @@ const prefectureData = [
             "テーマパーク・遊び",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 120000,
+        "transport": {
+            "car": {
+                "time": 480,
+                "cost": 60000
+            },
+            "shinkansen": {
+                "time": 288,
+                "cost": 160000
+            },
+            "flight": {
+                "time": 90,
+                "cost": 120000
+            }
+        }
     },
     {
         "id": 25,
@@ -505,7 +811,22 @@ const prefectureData = [
             "歴史・文化",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 100000,
+        "transport": {
+            "car": {
+                "time": 480,
+                "cost": 60000
+            },
+            "shinkansen": {
+                "time": 288,
+                "cost": 160000
+            },
+            "flight": {
+                "time": 90,
+                "cost": 120000
+            }
+        }
     },
     {
         "id": 26,
@@ -526,7 +847,22 @@ const prefectureData = [
             "歴史・文化",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 105000,
+        "transport": {
+            "car": {
+                "time": 600,
+                "cost": 75000
+            },
+            "shinkansen": {
+                "time": 360,
+                "cost": 200000
+            },
+            "flight": {
+                "time": 102,
+                "cost": 140000
+            }
+        }
     },
     {
         "id": 27,
@@ -546,7 +882,22 @@ const prefectureData = [
             "都市・グルメ",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 110000,
+        "transport": {
+            "car": {
+                "time": 600,
+                "cost": 75000
+            },
+            "shinkansen": {
+                "time": 360,
+                "cost": 200000
+            },
+            "flight": {
+                "time": 102,
+                "cost": 140000
+            }
+        }
     },
     {
         "id": 28,
@@ -566,7 +917,22 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 115000,
+        "transport": {
+            "car": {
+                "time": 600,
+                "cost": 75000
+            },
+            "shinkansen": {
+                "time": 360,
+                "cost": 200000
+            },
+            "flight": {
+                "time": 102,
+                "cost": 140000
+            }
+        }
     },
     {
         "id": 29,
@@ -586,7 +952,22 @@ const prefectureData = [
             "歴史・文化",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 120000,
+        "transport": {
+            "car": {
+                "time": 600,
+                "cost": 75000
+            },
+            "shinkansen": {
+                "time": 360,
+                "cost": 200000
+            },
+            "flight": {
+                "time": 102,
+                "cost": 140000
+            }
+        }
     },
     {
         "id": 30,
@@ -606,7 +987,22 @@ const prefectureData = [
             "自然",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 100000,
+        "transport": {
+            "car": {
+                "time": 600,
+                "cost": 75000
+            },
+            "shinkansen": {
+                "time": 360,
+                "cost": 200000
+            },
+            "flight": {
+                "time": 102,
+                "cost": 140000
+            }
+        }
     },
     {
         "id": 31,
@@ -625,7 +1021,22 @@ const prefectureData = [
             "海・リゾート",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 105000,
+        "transport": {
+            "car": {
+                "time": 720,
+                "cost": 90000
+            },
+            "shinkansen": {
+                "time": 432,
+                "cost": 240000
+            },
+            "flight": {
+                "time": 114,
+                "cost": 160000
+            }
+        }
     },
     {
         "id": 32,
@@ -645,7 +1056,22 @@ const prefectureData = [
             "歴史・文化",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 110000,
+        "transport": {
+            "car": {
+                "time": 720,
+                "cost": 90000
+            },
+            "shinkansen": {
+                "time": 432,
+                "cost": 240000
+            },
+            "flight": {
+                "time": 114,
+                "cost": 160000
+            }
+        }
     },
     {
         "id": 33,
@@ -665,7 +1091,22 @@ const prefectureData = [
             "自然",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 115000,
+        "transport": {
+            "car": {
+                "time": 720,
+                "cost": 90000
+            },
+            "shinkansen": {
+                "time": 432,
+                "cost": 240000
+            },
+            "flight": {
+                "time": 114,
+                "cost": 160000
+            }
+        }
     },
     {
         "id": 34,
@@ -684,7 +1125,22 @@ const prefectureData = [
             "歴史・文化",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 120000,
+        "transport": {
+            "car": {
+                "time": 720,
+                "cost": 90000
+            },
+            "shinkansen": {
+                "time": 432,
+                "cost": 240000
+            },
+            "flight": {
+                "time": 114,
+                "cost": 160000
+            }
+        }
     },
     {
         "id": 35,
@@ -705,7 +1161,22 @@ const prefectureData = [
             "歴史・文化",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 100000,
+        "transport": {
+            "car": {
+                "time": 720,
+                "cost": 90000
+            },
+            "shinkansen": {
+                "time": 432,
+                "cost": 240000
+            },
+            "flight": {
+                "time": 114,
+                "cost": 160000
+            }
+        }
     },
     {
         "id": 36,
@@ -725,7 +1196,22 @@ const prefectureData = [
             "海・リゾート",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 105000,
+        "transport": {
+            "car": {
+                "time": 720,
+                "cost": 90000
+            },
+            "shinkansen": {
+                "time": 432,
+                "cost": 240000
+            },
+            "flight": {
+                "time": 114,
+                "cost": 160000
+            }
+        }
     },
     {
         "id": 37,
@@ -745,7 +1231,22 @@ const prefectureData = [
             "海・リゾート",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 110000,
+        "transport": {
+            "car": {
+                "time": 720,
+                "cost": 90000
+            },
+            "shinkansen": {
+                "time": 432,
+                "cost": 240000
+            },
+            "flight": {
+                "time": 114,
+                "cost": 160000
+            }
+        }
     },
     {
         "id": 38,
@@ -765,7 +1266,22 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 115000,
+        "transport": {
+            "car": {
+                "time": 720,
+                "cost": 90000
+            },
+            "shinkansen": {
+                "time": 432,
+                "cost": 240000
+            },
+            "flight": {
+                "time": 114,
+                "cost": 160000
+            }
+        }
     },
     {
         "id": 39,
@@ -785,7 +1301,22 @@ const prefectureData = [
             "自然",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 120000,
+        "transport": {
+            "car": {
+                "time": 720,
+                "cost": 90000
+            },
+            "shinkansen": {
+                "time": 432,
+                "cost": 240000
+            },
+            "flight": {
+                "time": 114,
+                "cost": 160000
+            }
+        }
     },
     {
         "id": 40,
@@ -805,7 +1336,22 @@ const prefectureData = [
             "都市・グルメ",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 100000,
+        "transport": {
+            "car": {
+                "time": 840,
+                "cost": 105000
+            },
+            "shinkansen": {
+                "time": 504,
+                "cost": 280000
+            },
+            "flight": {
+                "time": 126,
+                "cost": 180000
+            }
+        }
     },
     {
         "id": 41,
@@ -825,7 +1371,22 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 105000,
+        "transport": {
+            "car": {
+                "time": 840,
+                "cost": 105000
+            },
+            "shinkansen": {
+                "time": 504,
+                "cost": 280000
+            },
+            "flight": {
+                "time": 126,
+                "cost": 180000
+            }
+        }
     },
     {
         "id": 42,
@@ -845,7 +1406,22 @@ const prefectureData = [
             "海・リゾート",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 110000,
+        "transport": {
+            "car": {
+                "time": 840,
+                "cost": 105000
+            },
+            "shinkansen": {
+                "time": 504,
+                "cost": 280000
+            },
+            "flight": {
+                "time": 126,
+                "cost": 180000
+            }
+        }
     },
     {
         "id": 43,
@@ -865,7 +1441,22 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 115000,
+        "transport": {
+            "car": {
+                "time": 840,
+                "cost": 105000
+            },
+            "shinkansen": {
+                "time": 504,
+                "cost": 280000
+            },
+            "flight": {
+                "time": 126,
+                "cost": 180000
+            }
+        }
     },
     {
         "id": 44,
@@ -885,7 +1476,22 @@ const prefectureData = [
             "自然",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 120000,
+        "transport": {
+            "car": {
+                "time": 840,
+                "cost": 105000
+            },
+            "shinkansen": {
+                "time": 504,
+                "cost": 280000
+            },
+            "flight": {
+                "time": 126,
+                "cost": 180000
+            }
+        }
     },
     {
         "id": 45,
@@ -905,7 +1511,22 @@ const prefectureData = [
             "海・リゾート",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 100000,
+        "transport": {
+            "car": {
+                "time": 840,
+                "cost": 105000
+            },
+            "shinkansen": {
+                "time": 504,
+                "cost": 280000
+            },
+            "flight": {
+                "time": 126,
+                "cost": 180000
+            }
+        }
     },
     {
         "id": 46,
@@ -925,7 +1546,22 @@ const prefectureData = [
             "温泉リラックス",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 105000,
+        "transport": {
+            "car": {
+                "time": 840,
+                "cost": 105000
+            },
+            "shinkansen": {
+                "time": 504,
+                "cost": 280000
+            },
+            "flight": {
+                "time": 126,
+                "cost": 180000
+            }
+        }
     },
     {
         "id": 47,
@@ -946,6 +1582,15 @@ const prefectureData = [
             "大自然・リゾート",
             "絶景",
             "子連れ・ファミリー"
-        ]
+        ],
+        "accommodationCost": 110000,
+        "transport": {
+            "car": null,
+            "shinkansen": null,
+            "flight": {
+                "time": 180,
+                "cost": 250000
+            }
+        }
     }
 ];

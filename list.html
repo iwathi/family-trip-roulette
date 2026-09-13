@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>都道府県データ一覧 - 家族旅行 行き先ルーレット</title>
-    <link rel="stylesheet" href="style.css?v=11">
+    <link rel="stylesheet" href="style.css?v=12">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         .data-grid {
@@ -41,12 +41,6 @@
             border: 1px solid var(--text-color);
             margin-bottom: 10px;
         }
-        .data-card .cost {
-            font-size: 1.2rem;
-            font-weight: 900;
-            color: #ff0054;
-            margin-bottom: 10px;
-        }
         .data-card ul {
             list-style-type: disc;
             padding-left: 20px;
@@ -67,16 +61,37 @@
             <div class="filters-section" style="margin-top: 20px; box-shadow: none;">
                 <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                     <div class="filter-group" style="flex: 1; min-width: 200px;">
-                        <label for="listBudgetFilter">💰 予算上限</label>
+                        <label for="listBudgetFilter">💰 予算上限（宿泊費＋最安交通費）</label>
                         <select id="listBudgetFilter">
                             <option value="unlimited">制限なし</option>
-                            <option value="100000">10万円以内</option>
+                            <option value="150000">15万円以内</option>
                             <option value="200000">20万円以内</option>
                             <option value="300000">30万円以内</option>
                             <option value="400000">40万円以内</option>
                             <option value="500000">50万円以内</option>
                         </select>
                     </div>
+                    
+                    <div class="filter-group" style="flex: 1; min-width: 200px;">
+                        <label for="listTimeFilter">⏳ 片道の移動時間上限</label>
+                        <select id="listTimeFilter">
+                            <option value="unlimited">制限なし</option>
+                            <option value="120">2時間以内</option>
+                            <option value="180">3時間以内</option>
+                            <option value="300">5時間以内</option>
+                            <option value="420">7時間以内</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group" style="flex: 1; min-width: 200px;">
+                        <label>🚆 希望する移動手段</label>
+                        <div style="display: flex; gap: 15px; margin-top: 5px;">
+                            <label><input type="checkbox" id="listModeCar" value="car" checked style="width:18px;height:18px;margin-right:5px;"> 車</label>
+                            <label><input type="checkbox" id="listModeShinkansen" value="shinkansen" checked style="width:18px;height:18px;margin-right:5px;"> 新幹線</label>
+                            <label><input type="checkbox" id="listModeFlight" value="flight" checked style="width:18px;height:18px;margin-right:5px;"> 飛行機</label>
+                        </div>
+                    </div>
+
                     <div class="filter-group" style="flex: 2; min-width: 300px;">
                         <label>🎯 ジャンル</label>
                         <div id="genreFilters" style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -92,11 +107,15 @@
         </main>
     </div>
     
-    <script src="data.js?v=5"></script>
+    <script src="data.js?v=12"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const dataGrid = document.getElementById('dataGrid');
             const listBudgetFilter = document.getElementById('listBudgetFilter');
+            const listTimeFilter = document.getElementById('listTimeFilter');
+            const listModeCar = document.getElementById('listModeCar');
+            const listModeShinkansen = document.getElementById('listModeShinkansen');
+            const listModeFlight = document.getElementById('listModeFlight');
             const genreFiltersContainer = document.getElementById('genreFilters');
             
             // Extract unique genres
@@ -111,7 +130,7 @@
                 checkbox.type = 'checkbox';
                 checkbox.id = `genre-${genre}`;
                 checkbox.value = genre;
-                checkbox.checked = false; // By default all or none? Let's say none means "all". Or better, all checked by default.
+                checkbox.checked = false; 
                 
                 const label = document.createElement('label');
                 label.htmlFor = `genre-${genre}`;
@@ -125,9 +144,21 @@
             });
             
             listBudgetFilter.addEventListener('change', renderCards);
+            listTimeFilter.addEventListener('change', renderCards);
+            listModeCar.addEventListener('change', renderCards);
+            listModeShinkansen.addEventListener('change', renderCards);
+            listModeFlight.addEventListener('change', renderCards);
 
             function formatCurrency(number) {
                 return new Intl.NumberFormat('ja-JP').format(number) + '円';
+            }
+            
+            function formatTime(minutes) {
+                const h = Math.floor(minutes / 60);
+                const m = minutes % 60;
+                if (h > 0 && m > 0) return `${h}時間${m}分`;
+                if (h > 0) return `${h}時間`;
+                return `${m}分`;
             }
             
             function renderCards() {
@@ -136,12 +167,42 @@
                 const maxBudgetStr = listBudgetFilter.value;
                 const maxBudget = maxBudgetStr === 'unlimited' ? Infinity : parseInt(maxBudgetStr);
                 
+                const maxTimeStr = listTimeFilter.value;
+                const maxTime = maxTimeStr === 'unlimited' ? Infinity : parseInt(maxTimeStr);
+                
                 const checkedGenres = Array.from(genreFiltersContainer.querySelectorAll('input:checked')).map(cb => cb.value);
                 
+                const allowedModes = {
+                    car: listModeCar.checked,
+                    shinkansen: listModeShinkansen.checked,
+                    flight: listModeFlight.checked
+                };
+                
                 const filteredData = prefectureData.filter(pref => {
-                    const withinBudget = pref.cost <= maxBudget;
                     const matchesGenre = checkedGenres.length === 0 || checkedGenres.some(g => pref.genre.includes(g));
-                    return withinBudget && matchesGenre;
+                    if (!matchesGenre) return false;
+                    
+                    let hasValidTransport = false;
+                    let lowestTotalCost = Infinity;
+
+                    for (const mode of ['car', 'shinkansen', 'flight']) {
+                        if (!allowedModes[mode]) continue;
+                        const tInfo = pref.transport[mode];
+                        if (!tInfo) continue;
+                        
+                        if (tInfo.time <= maxTime) {
+                            hasValidTransport = true;
+                            const totalCost = pref.accommodationCost + tInfo.cost;
+                            if (totalCost < lowestTotalCost) {
+                                lowestTotalCost = totalCost;
+                            }
+                        }
+                    }
+
+                    if (!hasValidTransport) return false;
+                    if (lowestTotalCost > maxBudget) return false;
+                    
+                    return true;
                 });
                 
                 if (filteredData.length === 0) {
@@ -155,11 +216,19 @@
                     
                     const spotsHtml = pref.spots.map(spot => `<li>${spot}</li>`).join('');
                     
+                    let tHtml = `<div style="font-size:0.9rem; background:#fff; padding:10px; border-radius:8px; border:1px solid #ccc; margin-bottom:10px;">`;
+                    tHtml += `<div style="color:var(--primary-color); font-weight:bold;">🏨 宿泊費(2泊): 約${formatCurrency(pref.accommodationCost)}</div>`;
+                    tHtml += `<div style="font-weight:bold; margin-top:5px; font-size:0.8rem;">往復交通費/片道時間:</div>`;
+                    if (pref.transport.car) tHtml += `<div>🚗 車: 約${formatCurrency(pref.transport.car.cost)} / ${formatTime(pref.transport.car.time)}</div>`;
+                    if (pref.transport.shinkansen) tHtml += `<div>🚄 新: 約${formatCurrency(pref.transport.shinkansen.cost)} / ${formatTime(pref.transport.shinkansen.time)}</div>`;
+                    if (pref.transport.flight) tHtml += `<div>✈️ 空: 約${formatCurrency(pref.transport.flight.cost)} / ${formatTime(pref.transport.flight.time)}</div>`;
+                    tHtml += `</div>`;
+                    
                     card.innerHTML = `
                         <h3>${pref.name}</h3>
                         <div class="region-badge">${pref.region}</div>
-                        <div class="region-badge" style="background: var(--secondary-color); color: white;">${pref.genre.join(" \/ ")}</div>
-                        <div class="cost">概算費用: 約 ${formatCurrency(pref.cost)}</div>
+                        <div class="region-badge" style="background: var(--secondary-color); color: white;">${pref.genre.join(" / ")}</div>
+                        ${tHtml}
                         <div><strong>おすすめスポット:</strong></div>
                         <ul>${spotsHtml}</ul>
                     `;
