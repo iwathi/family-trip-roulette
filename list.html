@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>都道府県データ一覧 - 家族旅行 行き先ルーレット</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .data-card {
+            background: var(--card-bg);
+            border: 3px solid var(--text-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: 4px 4px 0px var(--secondary-color);
+            transition: transform 0.1s;
+        }
+        .data-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--secondary-color);
+        }
+        .data-card h3 {
+            color: var(--primary-color);
+            border-bottom: 2px dashed var(--text-color);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .data-card .region-badge {
+            display: inline-block;
+            background: var(--accent-color);
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border: 1px solid var(--text-color);
+            margin-bottom: 10px;
+        }
+        .data-card .cost {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #ff0054;
+            margin-bottom: 10px;
+        }
+        .data-card ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 全都道府県データ一覧</h1>
+            <div class="menu">
+                <a href="index.html" class="menu-link">🔙 ルーレットへ戻る</a>
+            </div>
+        </header>
+
+        <main>
+            <div id="dataGrid" class="data-grid">
+                <!-- Data cards will be rendered here -->
+            </div>
+        </main>
+    </div>
+    
+    <script src="data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dataGrid = document.getElementById('dataGrid');
+            
+            function formatCurrency(number) {
+                return new Intl.NumberFormat('ja-JP').format(number) + '円';
+            }
+
+            prefectureData.forEach(pref => {
+                const card = document.createElement('div');
+                card.className = 'data-card';
+                
+                const spotsHtml = pref.spots.map(spot => `<li>${spot}</li>`).join('');
+                
+                card.innerHTML = `
+                    <h3>${pref.name}</h3>
+                    <div class="region-badge">${pref.region}</div>
+                    <div class="cost">概算費用: 約 ${formatCurrency(pref.cost)}</div>
+                    <div><strong>おすすめスポット:</strong></div>
+                    <ul>${spotsHtml}</ul>
+                `;
+                
+                dataGrid.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>

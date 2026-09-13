@@ -332,3 +332,24 @@ footer {
     transform: translate(2px, 2px);
     box-shadow: 2px 2px 0px var(--text-color);
 }
+
+.menu {
+    margin-top: 15px;
+}
+.menu-link {
+    display: inline-block;
+    background: var(--card-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 20px;
+    border: 2px solid var(--text-color);
+    border-radius: 20px;
+    box-shadow: 2px 2px 0px var(--text-color);
+    transition: transform 0.1s;
+}
+.menu-link:hover {
+    background: var(--accent-color);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px var(--text-color);
+}
