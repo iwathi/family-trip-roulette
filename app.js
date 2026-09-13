@@ -21,7 +21,7 @@ function init() {
 
 // ジャンルチェックボックスを描画
 function renderGenreCheckboxes() {
-    const genres = [...new Set(prefectureData.map(p => p.genre))];
+    const genres = [...new Set(prefectureData.flatMap(p => p.genre))];
     genres.forEach(genre => {
         const wrapper = document.createElement('div');
         wrapper.className = 'pref-checkbox-wrapper';
@@ -104,7 +104,7 @@ function getCandidates() {
     return prefectureData.filter(pref => {
         const notVisited = !visitedIds.includes(pref.id);
         const withinBudget = pref.cost <= maxBudget;
-        const matchesGenre = checkedGenres.length === 0 || checkedGenres.includes(pref.genre);
+        const matchesGenre = checkedGenres.length === 0 || checkedGenres.some(g => pref.genre.includes(g));
         return notVisited && withinBudget && matchesGenre;
     });
 }
