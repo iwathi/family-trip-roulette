@@ -180,8 +180,8 @@ select:focus {
 }
 
 .visited-prefectures-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 12px;
     max-height: 350px;
     overflow-y: auto;
@@ -200,6 +200,7 @@ select:focus {
     border-radius: 20px;
     border: 2px solid var(--text-color);
     transition: transform 0.1s;
+    white-space: nowrap; /* Prevent awkward wrapping inside the pill */
 }
 
 .pref-checkbox-wrapper:hover {
@@ -223,7 +224,7 @@ select:focus {
 }
 
 .region-header {
-    grid-column: 1 / -1;
+    width: 100%;
     font-weight: 900;
     color: #fff;
     background-color: var(--secondary-color);
@@ -231,9 +232,8 @@ select:focus {
     border-radius: 20px;
     border: 2px solid var(--text-color);
     margin-top: 15px;
-    margin-bottom: 10px;
-    display: inline-block;
-    width: fit-content;
+    margin-bottom: 5px;
+    display: block;
 }
 
 .region-header:first-child {
